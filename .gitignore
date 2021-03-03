@@ -1,6 +1,9 @@
 # Local .terraform directories
 **/.terraform/*
 
+# Potential provider binaries
+**/windows_amd64/*
+
 # .tfstate files
 *.tfstate
 *.tfstate.*

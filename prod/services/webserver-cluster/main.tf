@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "webserver_cluster" {
-  source = "../../../../modules/services/webserver-cluster"
+  source = "github.com/caplann3/modules//services/webserver-cluster?ref=v0.0.1"
 
   cluster_name = "webservers-prod"
   db_remote_state_bucket = var.db_remote_state_bucket
@@ -12,13 +12,18 @@ module "webserver_cluster" {
   instance_type = "t3.micro"
   min_size = 2
   max_size = 6
+
+  custom_tags = {
+    Owner = "team-foo"
+    DeployedBy = "terraform"
+  }
 }
 
 resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
   scheduled_action_name = "scale-out-during-business-hours"
   min_size = 2
   max_size = 10
-  desired_capacity = 10
+  desired_capacity = 5
   recurrence = "0 9 * * *"
 
   autoscaling_group_name = module.webserver_cluster.asg_name
