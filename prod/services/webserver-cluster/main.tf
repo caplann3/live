@@ -13,10 +13,10 @@ module "webserver_cluster" {
   min_size = 2
   max_size = 6
 
-  custom_tags = {
-    Owner = "team-foo"
-    DeployedBy = "terraform"
-  }
+ # custom_tags = {
+ #   Owner = "team-foo"
+ #   DeployedBy = "terraform"
+ # }
 }
 
 resource "aws_autoscaling_schedule" "scale_out_during_business_hours" {
